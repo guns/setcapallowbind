@@ -7,8 +7,8 @@ package main
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"path"
+	"syscall"
 
 	"github.com/jessevdk/go-flags"
 )
@@ -17,7 +17,7 @@ const usagesummary = `path
 
 Simple wrapper that calls:
 
-  setcap cap_net_bind_service=+ep path
+  /usr/bin/setcap cap_net_bind_service=+ep path
 
 Add to sudoers file:
 
@@ -56,7 +56,7 @@ func main() {
 		abort(err)
 	}
 
-	if err := exec.Command("setcap", "cap_net_bind_service=+ep", args[0]).Run(); err != nil {
+	if err := syscall.Exec("/usr/bin/setcap", []string{"setcap", "cap_net_bind_service=+ep", args[0]}, nil); err != nil {
 		abort(err)
 	}
 }
