@@ -17,11 +17,11 @@ const usagesummary = `path
 
 Simple wrapper that calls:
 
-	setcap cap_net_bind_service=+ep path
+  setcap cap_net_bind_service=+ep path
 
 Add to sudoers file:
 
-	user ALL = (ALL) NOPASSWD: /path/to/setcapallowbind`
+  user ALL = (ALL) NOPASSWD: /path/to/setcapallowbind`
 
 func abort(err error) {
 	if err != nil {
